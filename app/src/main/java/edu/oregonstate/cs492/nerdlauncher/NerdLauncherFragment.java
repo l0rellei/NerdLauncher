@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -68,18 +70,23 @@ public class NerdLauncherFragment extends Fragment {
                 implements View.OnClickListener{
         private ResolveInfo mResolveInfo;
         private TextView mNameTextView;
+        private ImageView mAppImage;
 
         public ActivityHolder(View itemView) {
             super(itemView);
             mNameTextView = (TextView) itemView;
             mNameTextView.setOnClickListener(this);
+            mAppImage = (ImageView) itemView.findViewById(android.R.id.icon);
+//            mAppImage.setOnClickListener(this);
         }
 
         public void bindActivity(ResolveInfo resolveInfo) {
             mResolveInfo = resolveInfo;
             PackageManager pm = getActivity().getPackageManager();
             String appName = mResolveInfo.loadLabel(pm).toString();
+//            Drawable appIcon = mResolveInfo.loadIcon(pm);
             mNameTextView.setText(appName);
+//            mAppImage.setImageDrawable(appIcon);
         }
 
         @Override
